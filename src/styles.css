@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --bg-color: #f0f4f8;
+    --primary-color: #2f4f4f;
+    --apple-green: #4caf50;
+    --apple-brown: #783c00;
+    --selected-blue: #2196f3;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+}
+
 body {
     margin: 0;
 }

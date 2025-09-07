@@ -1,0 +1,45 @@
+<div class="main-container">
+  <header>
+    <div class="container">
+      <h1 class="nome-site fino">Glutão</h1>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="content">
+      <div class="row">
+        <div id="rules-click" class="left col-3">
+          <h2 id="rules" class="fino" #rulesClick>Regras</h2>
+        </div>
+
+        <div class="gm col-3">
+          <h2 class="fino">Game mode</h2>
+          <div class="game-mode" (change)="onGameModeChange($event)">
+            <span>
+              <input type="radio" id="easy" name="mode" value="easy" [checked]="gameMode === 'easy'"/>
+              <label for="easy">Easy</label>
+            </span>
+            <span>
+              <input type="radio" id="medium" name="mode" value="medium" [checked]="gameMode === 'medium'"/>
+              <label for="medium">Medium</label>
+            </span>
+            <span>
+              <input type="radio" id="hard" name="mode" value="hard" [checked]="gameMode === 'hard'"/>
+              <label for="hard">Hard</label>
+            </span>
+          </div>
+        </div>
+
+        <div id="player-click" class="right col-3">
+          <h2 id="player" class="fino" #playerText>Sua vez!</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="center">
+          <button id="comer" class="btn sucess" (click)="onComerClick()">Comer</button>
+          <div id="pecas" #pecasContainer></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
