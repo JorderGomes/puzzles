@@ -6,227 +6,214 @@ import { AfterViewInit, Component, ElementRef, ViewChild, Renderer2 } from '@ang
   styleUrls: ['./glutao.component.css']
 })
 export class GlutaoComponent implements AfterViewInit {
-  @ViewChild('pecasContainer') pecasContainer!: ElementRef;
+  @ViewChild('piecesContainer') piecesContainer!: ElementRef;
   @ViewChild('playerText') playerText!: ElementRef;
   @ViewChild('rulesClick') rulesClick!: ElementRef;
 
+  isMenuOpen = false;
+  showRulesPopup = false;
+
   constructor(private renderer: Renderer2) { }
 
-  minPecas = 15;
-  maxPecas = 26;
-  minRetirada = 3;
-  maxRetirada = 6;
-  qtdPecasExistentes!: number;
-  qtdRetirada!: number;
-  pecasSelecionadas: HTMLElement[] = [];
+  minPieces = 15;
+  maxPieces = 26;
+  minRemoval = 3;
+  maxRemoval = 6;
+  QtyExistingPieces: number = 0;
+  QtyRemoval: number = 0;
+  selectedPieces: HTMLElement[] = [];
   gameMode = 'hard';
 
   ngAfterViewInit(): void {
-    this.criarJogo();
+    this.createGame();
     this.setupListeners();
   }
 
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  onRulesClick(): void {
+    this.showRulesPopup = true;
+  }
+
+  closeRulesPopup(): void {
+    this.showRulesPopup = false;
+  }
+
   setupListeners(): void {
-    this.pecasContainer.nativeElement.addEventListener('click', (e: Event) => {
+    this.piecesContainer.nativeElement.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
       if (target.classList.contains('selectable')) {
-        this.selecionarPeca(target);
+        this.selectPiece(target);
       } else if (target.classList.contains('selected')) {
-        this.deselecionarPeca(target);
+        this.deselectPiece(target);
       }
     });
-
-    this.rulesClick.nativeElement.addEventListener('click', () => {
-      window.alert(
-        "Aqui há " + this.qtdPecasExistentes +
-        " maçãs. \nDurante o jogo cada jogador alternativamente " +
-        "pode retirar desde 1 até " + this.qtdRetirada +
-        " delas. \nAquele que ficar com o último perderá. "
-      );
-    });
   }
 
-  criarJogo(): void {
-    this.qtdPecasExistentes = Math.floor(Math.random() * (this.maxPecas - this.minPecas) + this.minPecas);
-    this.qtdRetirada = Math.floor(Math.random() * (this.maxRetirada - this.minRetirada) + this.minRetirada);
-    this.criarPecasHTML();
+  createGame(): void {
+    setTimeout(() => {
+      this.QtyExistingPieces = Math.floor(Math.random() * (this.maxPieces - this.minPieces) + this.minPieces);
+      this.QtyRemoval = Math.floor(Math.random() * (this.maxRemoval - this.minRemoval) + this.minRemoval);
+      this.createPiecesHTML();
+    }, 0);
   }
 
-  // criarPecasHTML(): void {
-  //   this.pecasContainer.nativeElement.innerHTML = '';
-  //   for (let i = 0; i < this.qtdPecasExistentes; i++) {
-  //     const peca = document.createElement('i');
-  //     peca.classList.add('fas', 'fa-apple-alt');
-  //     if (i === this.qtdPecasExistentes - 1) {
-  //       peca.classList.add('rotten');
-  //     } else {
-  //       peca.classList.add('selectable');
-  //     }
-  //     peca.id = `peca-${i}`;
-  //     this.pecasContainer.nativeElement.appendChild(peca);
-  //   }
-  // }
-
-  criarPecasHTML(): void {
-    const container = this.pecasContainer.nativeElement;
+  createPiecesHTML(): void {
+    const container = this.piecesContainer.nativeElement;
 
     // Limpa o conteúdo do container
     while (container.firstChild) {
       this.renderer.removeChild(container, container.firstChild);
     }
 
-    for (let i = 0; i < this.qtdPecasExistentes; i++) {
-      const peca = this.renderer.createElement('i');
-      this.renderer.addClass(peca, 'fas');
-      this.renderer.addClass(peca, 'fa-apple-alt');
+    for (let i = 0; i < this.QtyExistingPieces; i++) {
+      const piece = this.renderer.createElement('i');
+      this.renderer.addClass(piece, 'fas');
+      this.renderer.addClass(piece, 'fa-apple-alt');
 
-      if (i === this.qtdPecasExistentes - 1) {
-        this.renderer.addClass(peca, 'rotten');
+      if (i === this.QtyExistingPieces - 1) {
+        this.renderer.addClass(piece, 'rotten');
       } else {
-        this.renderer.addClass(peca, 'selectable');
+        this.renderer.addClass(piece, 'selectable');
       }
-      this.renderer.setAttribute(peca, 'id', `peca-${i}`);
-      this.renderer.appendChild(container, peca);
+      this.renderer.setAttribute(piece, 'id', `piece-${i}`);
+      this.renderer.appendChild(container, piece);
     }
   }
 
-  selecionarPeca(peca: HTMLElement): void {
-    if (this.pecasSelecionadas.length < this.qtdRetirada) {
-      peca.classList.add('selected');
-      peca.classList.remove('selectable');
-      this.pecasSelecionadas.push(peca);
+  selectPiece(piece: HTMLElement): void {
+    if (this.selectedPieces.length < this.QtyRemoval) {
+      piece.classList.add('selected');
+      piece.classList.remove('selectable');
+      this.selectedPieces.push(piece);
     }
   }
 
-  deselecionarPeca(peca: HTMLElement): void {
-    peca.classList.remove('selected');
-    peca.classList.add('selectable');
-    const index = this.pecasSelecionadas.indexOf(peca);
+  deselectPiece(piece: HTMLElement): void {
+    piece.classList.remove('selected');
+    piece.classList.add('selectable');
+    const index = this.selectedPieces.indexOf(piece);
     if (index > -1) {
-      this.pecasSelecionadas.splice(index, 1);
+      this.selectedPieces.splice(index, 1);
     }
   }
 
-  comer(): void {
-    if (this.pecasSelecionadas.length === 0) {
+  removePieces(): void {
+    if (this.selectedPieces.length === 0) {
       console.log("Por favor escolha algumas maçãs");
       return;
     }
-    this.pecasSelecionadas.forEach(peca => peca.remove());
-    this.qtdPecasExistentes -= this.pecasSelecionadas.length;
-    this.pecasSelecionadas = [];
-    this.mudarJogador();
-    this.verificarFimDeJogo();
-    this.bloquearPecas();
-    setTimeout(() => {
-      this.jogar();
-      setTimeout(() => this.desbloquearPecas(), 1500);
-    }, 1000);
+    this.selectedPieces.forEach(piece => piece.remove());
+    this.QtyExistingPieces -= this.selectedPieces.length;
+    this.selectedPieces = [];
+    this.changePlayer();
+    this.verifyEndGame();
+    this.blockPieces();
   }
 
-  mudarJogador(): void {
-    const jogadorAtual = this.playerText.nativeElement.textContent;
-    this.playerText.nativeElement.textContent = jogadorAtual === "Sua vez!" ? "Minha vez!" : "Sua vez!";
+  onReplayClick(): void {
+    this.selectedPieces = [];
+    this.playerText.nativeElement.textContent = "Sua vez!";
+    this.createGame();
+    this.unblockPieces();
   }
 
-  verificarFimDeJogo(): void {
-    if (this.qtdPecasExistentes <= 1) {
-      const jogadorAtual = this.playerText.nativeElement.textContent;
-      this.playerText.nativeElement.textContent = jogadorAtual === "Sua vez!" ? "Você perdeu!" : "Você venceu!";
+  changePlayer(): void {
+    const currentPlayer = this.playerText.nativeElement.textContent;
+    this.playerText.nativeElement.textContent = currentPlayer === "Sua vez!" ? "Minha vez!" : "Sua vez!";
+  }
+
+  verifyEndGame(): void {
+    if (this.QtyExistingPieces <= 1) {
+      const currentPlayer = this.playerText.nativeElement.textContent;
+      this.playerText.nativeElement.textContent = currentPlayer === "Sua vez!" ? "Você perdeu!" : "Você venceu!";
     }
   }
 
-  jogar(): void {
+  play(): void {
     if (this.gameMode === "easy") {
-      this.jogarEasy();
+      this.playEasy();
     } else if (this.gameMode === "medium") {
-      this.jogarMedium();
+      this.playMedium();
     } else if (this.gameMode === "hard") {
-      this.jogarHard();
+      this.playHard();
     }
   }
 
-  jogarMedium(): void {
+  playMedium(): void {
     const decision = Math.floor(Math.random() * 2);
     if (decision === 0) {
-      this.jogarEasy();
+      this.playEasy();
     } else {
-      this.jogarHard();
+      this.playHard();
     }
   }
 
-  jogarEasy(): void {
-    let qtdARetirar = Math.floor(Math.random() * (Math.min(this.qtdRetirada, this.qtdPecasExistentes - 1)) + 1);
-    this.selecionarPecasAutomaticamente(qtdARetirar);
-    this.comer();
+  playEasy(): void {
+    let qtyToRemove = Math.floor(Math.random() * (Math.min(this.QtyRemoval, this.QtyExistingPieces - 1)) + 1);
+    this.autoSelectPieces(qtyToRemove);
+    this.removePieces();
   }
 
-  selecionarPecasAutomaticamente(qtd: number): void {
-    const todasPecas = Array.from(this.pecasContainer.nativeElement.children);
-    while (this.pecasSelecionadas.length < qtd) {
-      const indice = Math.floor(Math.random() * todasPecas.length);
-      const peca = todasPecas[indice] as HTMLElement;
-      if (peca && !peca.classList.contains('rotten') && !this.pecasSelecionadas.includes(peca)) {
-        this.selecionarPeca(peca);
+  autoSelectPieces(qtd: number): void {
+    const allPieces = Array.from(this.piecesContainer.nativeElement.children);
+    while (this.selectedPieces.length < qtd) {
+      const index = Math.floor(Math.random() * allPieces.length);
+      const piece = allPieces[index] as HTMLElement;
+      if (piece && !piece.classList.contains('rotten') && !this.selectedPieces.includes(piece)) {
+        this.selectPiece(piece);
       }
     }
   }
 
-  jogarHard(): void {
-    const critico = (this.qtdPecasExistentes - 1) % (this.qtdRetirada + 1);
-    if (critico === 0) {
-      this.jogarEasy();
+  playHard(): void {
+    const critical = (this.QtyExistingPieces - 1) % (this.QtyRemoval + 1);
+    if (critical === 0) {
+      this.playEasy();
     } else {
-      this.selecionarPecasAutomaticamente(critico);
-      this.comer();
+      this.autoSelectPieces(critical);
+      this.removePieces();
     }
   }
 
-  bloquearPecas(): void {
-    const todasPecas = this.pecasContainer.nativeElement.children;
-    for (let i = 0; i < todasPecas.length; i++) {
-      const peca = todasPecas[i] as HTMLElement;
-      if (peca.classList.contains('selectable')) {
-        peca.classList.add('disable');
-        peca.classList.remove('selectable');
+  blockPieces(): void {
+    const allPieces = this.piecesContainer.nativeElement.children;
+    for (let i = 0; i < allPieces.length; i++) {
+      const piece = allPieces[i] as HTMLElement;
+      if (piece.classList.contains('selectable')) {
+        piece.classList.add('disable');
+        piece.classList.remove('selectable');
       }
     }
   }
 
-  desbloquearPecas(): void {
-    const todasPecas = this.pecasContainer.nativeElement.children;
-    for (let i = 0; i < todasPecas.length; i++) {
-      const peca = todasPecas[i] as HTMLElement;
-      if (peca.classList.contains('disable')) {
-        peca.classList.add('selectable');
-        peca.classList.remove('disable');
+  unblockPieces(): void {
+    const allPieces = this.piecesContainer.nativeElement.children;
+    for (let i = 0; i < allPieces.length; i++) {
+      const piece = allPieces[i] as HTMLElement;
+      if (piece.classList.contains('disable')) {
+        piece.classList.add('selectable');
+        piece.classList.remove('disable');
       }
     }
   }
 
   // Métodos de eventos do HTML
-  onComerClick(): void {
-    this.comer();
+  onEatClick(): void {
+    this.removePieces();
+    setTimeout(() => {
+      this.play();
+      setTimeout(() => this.unblockPieces(), 1500);
+    }, 1000);
   }
 
-  // onGameModeChange(mode: string): void {
-  //   this.gameMode = mode;
-  // }
   onGameModeChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     if (target && target.value) {
       this.gameMode = target.value;
     }
   }
+
 }
-
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-glutao',
-//   templateUrl: './glutao.component.html',
-//   styleUrl: './glutao.component.css'
-// })
-// export class GlutaoComponent {
-
-// }

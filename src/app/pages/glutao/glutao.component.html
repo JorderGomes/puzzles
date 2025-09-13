@@ -1,45 +1,83 @@
 <div class="main-container">
   <header>
     <div class="container">
-      <h1 class="nome-site fino">Glutão</h1>
+      <button class="btn-hamburger" (click)="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h1 class="page-title thin">Glutão</h1>
     </div>
   </header>
+
+  <nav class="sidenav" [class.open]="isMenuOpen">
+    <div class="menu-item">
+      <button class="btn-close-menu" (click)="toggleMenu()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <a href="/puzzles" class="btn">
+        <i class="fas fa-arrow-left"></i> Voltar
+      </a>
+    </div>
+
+    <div class="menu-item">
+      <button class="btn" (click)="onRulesClick(); toggleMenu()">
+        <i class="fas fa-gear"></i> Regras
+      </button>
+    </div>
+
+    <div class="menu-item">
+      <select class="form-select" (change)="onGameModeChange($event); toggleMenu()">
+        <option value="easy" [selected]="gameMode === 'easy'">Easy</option>
+        <option value="medium" [selected]="gameMode === 'medium'">Medium</option>
+        <option value="hard" [selected]="gameMode === 'hard'">Hard</option>
+      </select>
+    </div>
+
+    <div class="menu-item">
+      <button class="btn" (click)="onReplayClick(); toggleMenu()">
+        <i class="fas fa-arrow-rotate-left"></i> Reiniciar
+      </button>
+    </div>
+  </nav>
+
+  <div class="popup" [class.is-visible]="showRulesPopup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <h3 class="popup-title">Regras</h3>
+        <button class="close-popup-btn" (click)="closeRulesPopup()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Aqui há {{ QtyExistingPieces }} maçãs.</p>
+      <p>Durante o jogo cada jogador alternativamente pode retirar desde 1 até {{ QtyRemoval }} delas.</p>
+      <p>Aquele que ficar com a última, perderá.</p>
+    </div>
+  </div>
+
+  <div class="backdrop" [class.visible]="isMenuOpen" (click)="toggleMenu()"></div>
 
   <div class="container">
     <section class="content">
       <div class="row">
-        <div id="rules-click" class="left col-3">
-          <h2 id="rules" class="fino" #rulesClick>Regras</h2>
-        </div>
-
-        <div class="gm col-3">
-          <h2 class="fino">Game mode</h2>
-          <div class="game-mode" (change)="onGameModeChange($event)">
-            <span>
-              <input type="radio" id="easy" name="mode" value="easy" [checked]="gameMode === 'easy'"/>
-              <label for="easy">Easy</label>
-            </span>
-            <span>
-              <input type="radio" id="medium" name="mode" value="medium" [checked]="gameMode === 'medium'"/>
-              <label for="medium">Medium</label>
-            </span>
-            <span>
-              <input type="radio" id="hard" name="mode" value="hard" [checked]="gameMode === 'hard'"/>
-              <label for="hard">Hard</label>
-            </span>
-          </div>
-        </div>
-
-        <div id="player-click" class="right col-3">
-          <h2 id="player" class="fino" #playerText>Sua vez!</h2>
+        <div id="player-click" class="center col-3">
+          <h2 id="player" class="thin" #playerText>Sua vez!</h2>
         </div>
       </div>
+
       <div class="row">
         <div class="center">
-          <button id="comer" class="btn sucess" (click)="onComerClick()">Comer</button>
-          <div id="pecas" #pecasContainer></div>
+          <div id="pieces" #piecesContainer></div>
         </div>
       </div>
+
+      <div class="row action-buttons-row">
+        <div class="action-buttons-group">
+          <button id="eat" class="btn sucess" (click)="onEatClick()">Comer</button>
+        </div>
+      </div>
+
     </section>
   </div>
 </div>
