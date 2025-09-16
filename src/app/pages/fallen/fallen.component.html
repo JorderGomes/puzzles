@@ -1,0 +1,67 @@
+<header>
+    <h1 id="site-name">FALLEN</h1>
+    <button id="btn-rules" class="btn btn-square primary pointer">?</button>
+</header>
+
+<div class="container">
+    <div class="show-rules">
+    </div>
+    <div id="maze" #maze>
+
+    </div>
+    <div class="controls">
+        <div class="row center">
+            <button id="btn-up" class="btn primary">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
+        <div class="row side">
+            <button id="btn-left" class="btn primary">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <button id="btn-right" class="btn primary">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="row center">
+            <button id="btn-down" class="btn primary">
+                <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+    </div>
+</div>
+<div id="popup-canvas">
+    <div id="popup-rules">
+        <div class="rules-header">
+            <h3>Rules</h3>
+            <button id="btn-rules-close" class="btn btn-square primary pointer">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="rule-body">
+            <p>
+                <i class="fas fa-square-full black"></i>
+                Neste labirinto os caminhos não são limitados por paredes mas sim por
+                um abismo. Portanto mantenha-se no caminho e não se jogue no abismo.
+            </p>
+
+            <p>
+                <i class="fas fa-square-full yellow"></i>
+                Este é você. Guie-se pelo caminho até seu objetivo com este avatar.
+            </p>
+
+            <p>
+                <i class="fas fa-square-full red"></i>
+                Este é seu objetivo. Corra pelo labirinto até alcançar e comer esta fruta.
+            </p>
+    
+            <p>
+                <i class="fas fa-square-full white"></i>
+                O labirinto é um local escuro, mas por sorte você tem uma tocha para
+                iluminar o caminho ao seu redor.
+            </p>
+        </div>
+    </div>
+</div>

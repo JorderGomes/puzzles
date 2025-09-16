@@ -1,12 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
+    /* main */
+    --bg-color: #f0f4f8;
+    --primary-color: #2f4f4f;
+    --shadow-light: rgba(0, 0, 0, 0.1);
+    --shadow-dark: rgba(0, 0, 0, 0.3);
+
+    /* second */
+    --background-color: #AC929A;
+    --background-color-light: #C9B2BA;
+    --text-color: #FAFAFF;
+    --bg-primary-button: #312a2c;
+    --color-bg-popup: #312B2D;
+    --border-primary: #7C686D;
+
+    /* glutao */
+    --apple-green: #4caf50;
+    --apple-brown: #783c00;
+    --selected-blue: #2196f3;
+
+    /* guess */
+    --red: #FFA07A;
+    --blue: #ADD8E6;
+    --pink: #FFB6C1;
+    --yellow: #ECECCB;
+    --green: #98FB98;
+    --purple: #E6E6FA;
+
+    /* 
     --bg-color: #f0f4f8;
     --primary-color: #2f4f4f;
     --apple-green: #4caf50;
     --apple-brown: #783c00;
     --selected-blue: #2196f3;
     --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-dark: rgba(0, 0, 0, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.3); 
+    */
 }
 
 body {
