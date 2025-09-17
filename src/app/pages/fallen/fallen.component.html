@@ -1,7 +1,36 @@
 <header>
-    <h1 id="site-name">FALLEN</h1>
-    <button id="btn-rules" class="btn btn-square primary pointer">?</button>
+    <div class="header-container">
+        <button class="btn-hamburger" (click)="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <h1 id="site-name">FALLEN</h1>
+    </div>
 </header>
+
+<nav class="sidenav" [class.open]="isMenuOpen">
+    <div class="menu-item">
+        <button class="btn-close-menu" (click)="toggleMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="menu-item">
+        <a href="/puzzles" class="btn">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </a>
+    </div>
+    <div class="menu-item">
+        <button class="btn" (click)="onRulesClick(); toggleMenu()">
+            <i class="fas fa-gear"></i> Regras
+        </button>
+    </div>
+    <div class="menu-item">
+        <button class="btn" (click)="onResetClick(); toggleMenu()">
+            <i class="fas fa-arrow-rotate-left"></i> Reiniciar
+        </button>
+    </div>
+</nav>
+
+<div class="backdrop" [class.visible]="isMenuOpen" (click)="toggleMenu()"></div>
 
 <div class="container">
     <div class="show-rules">
@@ -11,32 +40,33 @@
     </div>
     <div class="controls">
         <div class="row center">
-            <button id="btn-up" class="btn primary">
+            <button id="btn-up" #btnUp class="btn primary">
                 <i class="fas fa-arrow-up"></i>
             </button>
         </div>
 
         <div class="row side">
-            <button id="btn-left" class="btn primary">
+            <button id="btn-left" #btnLeft class="btn primary">
                 <i class="fas fa-arrow-left"></i>
             </button>
-            <button id="btn-right" class="btn primary">
+            <button id="btn-right" #btnRight class="btn primary">
                 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
 
         <div class="row center">
-            <button id="btn-down" class="btn primary">
+            <button id="btn-down" #btnDown class="btn primary">
                 <i class="fas fa-arrow-down"></i>
             </button>
         </div>
     </div>
 </div>
+
 <div id="popup-canvas">
     <div id="popup-rules">
         <div class="rules-header">
             <h3>Rules</h3>
-            <button id="btn-rules-close" class="btn btn-square primary pointer">
+            <button id="btn-rules-close" #btnRulesClose class="btn btn-square primary pointer">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -56,7 +86,7 @@
                 <i class="fas fa-square-full red"></i>
                 Este é seu objetivo. Corra pelo labirinto até alcançar e comer esta fruta.
             </p>
-    
+
             <p>
                 <i class="fas fa-square-full white"></i>
                 O labirinto é um local escuro, mas por sorte você tem uma tocha para

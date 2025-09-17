@@ -1,5 +1,5 @@
 
-import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild, ElementRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnDestroy, AfterViewInit, ViewChild, ElementRef, Inject, PLATFORM_ID, Renderer2, NgZone } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -8,8 +8,14 @@ import { isPlatformBrowser } from '@angular/common';
   styleUrls: ['./fallen.component.css']
 })
 export class FallenComponent implements OnDestroy, AfterViewInit {
-  
+
   @ViewChild('maze') mazeElement!: ElementRef;
+  @ViewChild('btnUp') btnUp!: ElementRef;
+  @ViewChild('btnDown') btnDown!: ElementRef;
+  @ViewChild('btnLeft') btnLeft!: ElementRef;
+  @ViewChild('btnRight') btnRight!: ElementRef;
+  // @ViewChild('btnRules') btnRules!: ElementRef;
+  @ViewChild('btnRulesClose') btnRulesClose!: ElementRef;
 
   private height = 10;
   private width = 10;
@@ -33,47 +39,39 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
   private readonly fruit = 'fruit';
   private readonly light = 'light';
 
-   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+  isMenuOpen = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private renderer: Renderer2, private ngZone: NgZone) { }
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-        this.maze = this.mazeElement.nativeElement;
-        this.setupBoard();
-        this.bindEvents();
+      this.maze = this.mazeElement.nativeElement;
+      this.setupBoard();
+      this.bindEvents();
     }
-    // this.maze = document.getElementById("maze") as HTMLElement;
-    // this.setupBoard();
-    // Adiciona event listeners para os botões de controle e teclado
-    // this.bindEvents();
   }
 
   ngOnDestroy(): void {
     // Limpa os event listeners para evitar memory leaks
     if (isPlatformBrowser(this.platformId)) {
-        this.unbindEvents();
+      this.unbindEvents();
     }
   }
 
   private bindEvents(): void {
-    document.addEventListener("keydown", this.handleKeyboardEvent);
+    // Adiciona event listeners para o teclado
+    this.renderer.listen('document', 'keydown', this.handleKeyboardEvent);
 
-    document.getElementById('btn-up')?.addEventListener('click', this.moveUp);
-    document.getElementById('btn-down')?.addEventListener('click', this.moveDown);
-    document.getElementById('btn-left')?.addEventListener('click', this.moveLeft);
-    document.getElementById('btn-right')?.addEventListener('click', this.moveRight);
-
-    document.getElementById('btn-rules')?.addEventListener('click', this.showRules);
-    document.getElementById('btn-rules-close')?.addEventListener('click', this.hideRules);
+    // Adiciona event listeners para os botões usando o Renderer2
+    this.renderer.listen(this.btnUp.nativeElement, 'click', this.moveUp);
+    this.renderer.listen(this.btnDown.nativeElement, 'click', this.moveDown);
+    this.renderer.listen(this.btnLeft.nativeElement, 'click', this.moveLeft);
+    this.renderer.listen(this.btnRight.nativeElement, 'click', this.moveRight);
+    // this.renderer.listen(this.btnRules.nativeElement, 'click', this.showRules);
+    this.renderer.listen(this.btnRulesClose.nativeElement, 'click', this.hideRules);
   }
 
   private unbindEvents(): void {
-    document.removeEventListener("keydown", this.handleKeyboardEvent);
-    document.getElementById('btn-up')?.removeEventListener('click', this.moveUp);
-    document.getElementById('btn-down')?.removeEventListener('click', this.moveDown);
-    document.getElementById('btn-left')?.removeEventListener('click', this.moveLeft);
-    document.getElementById('btn-right')?.removeEventListener('click', this.moveRight);
-    document.getElementById('btn-rules')?.removeEventListener('click', this.showRules);
-    document.getElementById('btn-rules-close')?.removeEventListener('click', this.hideRules);
   }
 
   private handleKeyboardEvent = (e: KeyboardEvent) => {
@@ -107,7 +105,7 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     }
 
     const newHouseId = this.generateId(nextX, nextY);
-    const newHouse = document.getElementById(newHouseId);
+    const newHouse = this.renderer.selectRootElement(`#${newHouseId}`, true); // document.getElementById(newHouseId);
 
     if (newHouse?.classList.contains(this.empty)) {
       this.endGame(false);
@@ -122,22 +120,35 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     this.detectCollision();
   }
 
+  // NOVO: Método para alternar a visibilidade do menu
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  // NOVO: Método para lidar com o clique no item "Regras"
+  onRulesClick(): void {
+    this.renderer.setStyle(this.renderer.selectRootElement('#popup-canvas', true), 'display', 'flex');
+    this.renderer.setStyle(this.renderer.selectRootElement('#popup-rules', true), 'display', 'block');
+  }
+
+  // NOVO: Método para lidar com o clique no item "Reiniciar"
+  onResetClick(): void {
+    // this.endGame(false);
+    this.setupBoard();
+  }
+
   private showRules = () => {
-    const popupCanvas = document.getElementById('popup-canvas');
-    const popupRules = document.getElementById('popup-rules');
-    if (popupCanvas && popupRules) {
-      popupCanvas.style.display = 'flex';
-      popupRules.style.display = 'block';
-    }
+    const popupCanvas = this.renderer.selectRootElement('#popup-canvas', true); // document.getElementById('popup-canvas');
+    const popupRules = this.renderer.selectRootElement('#popup-rules', true); //document.getElementById('popup-rules');
+    this.renderer.setStyle(popupCanvas, 'display', 'flex');
+    this.renderer.setStyle(popupRules, 'display', 'block');
   }
 
   private hideRules = () => {
-    const popupCanvas = document.getElementById('popup-canvas');
-    const popupRules = document.getElementById('popup-rules');
-    if (popupCanvas && popupRules) {
-      popupCanvas.style.display = 'none';
-      popupRules.style.display = 'none';
-    }
+    const popupCanvas = this.renderer.selectRootElement('#popup-canvas', true); //document.getElementById('popup-canvas');
+    const popupRules = this.renderer.selectRootElement('#popup-rules', true); //document.getElementById('popup-rules');
+    this.renderer.setStyle(popupCanvas, 'display', 'none');
+    this.renderer.setStyle(popupRules, 'display', 'none');
   }
 
 
@@ -145,25 +156,47 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     return "cell-" + x + "-" + y;
   }
 
-  private setupBoard(): void {
-    // Limpa o labirinto antes de criar um novo
-    while (this.maze.firstChild) {
-      this.maze.removeChild(this.maze.firstChild);
-    }
-
+  private resetGame(): void {
+    this.stack = [];
+    this.completeMaze = [];
     this.completeBoard = [];
+    this.availableMaze = [];
+    this.reachedHouses = [];
+    this.gameOn = true;
+    this.fruitHouse = null;
+    this.Player = null;
+    while (this.maze.firstChild) {
+      this.renderer.removeChild(this.maze, this.maze.firstChild);
+    }
+  }
+
+  private generateBoard(): void {
     for (let i = 0; i < this.height; i++) {
       for (let j = 0; j < this.width; j++) {
         const cellId = this.generateId(i, j);
-        const cell = document.createElement("div");
-        cell.classList.add('cell', this.empty);
-        cell.id = cellId;
+        const cell = this.renderer.createElement("div"); //document.createElement("div");
+        this.renderer.addClass(cell, 'cell'); //cell.classList.add('cell', this.empty);
+        this.renderer.addClass(cell, this.empty); //
+        this.renderer.setAttribute(cell, 'id', cellId); //cell.id = cellId;
         const house = { house: cell, x: i, y: j, tunnelable: false, updateHouse: (newX: number, newY: number) => this.updateHouse(house, newX, newY) };
-        this.maze.appendChild(cell);
+        this.renderer.appendChild(this.maze, cell); //this.maze.appendChild(cell);
         this.completeBoard.push(house);
       }
     }
-    this.generateMaze();
+  }
+
+  private setupBoard(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.resetGame();
+      this.generateBoard();
+      this.initializeGameLogic();
+    }
+  }
+
+  private initializeGameLogic(): void {
+    while (this.completeMaze.length === 0){
+      this.generateMaze();
+    }
     this.assignInitialHouse();
     this.assignFruitHouse();
     this.turnOnLights();
@@ -195,17 +228,20 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     this.swapHouseClass(houseNow.house, this.open, this.character);
     this.Player = { house: houseNow };
     this.availableMaze = this.completeMaze.filter(el => !el.house.classList.contains(this.character));
+    console.log();
   }
 
   private assignFruitHouse(): void {
     this.fruitHouse = this.availableMaze[Math.floor(Math.random() * this.availableMaze.length)];
     this.swapHouseClass(this.fruitHouse.house, this.open, this.fruit);
     this.availableMaze = this.completeMaze.filter(el => !el.house.classList.contains(this.fruit));
+    console.log();
   }
 
   private swapHouseClass(house: HTMLElement, remClass: string, addClass: string): void {
-    house.classList.remove(remClass);
-    house.classList.add(addClass);
+    this.renderer.removeClass(house, remClass); //house.classList.remove(remClass);
+    this.renderer.addClass(house, addClass); //house.classList.add(addClass);
+    console.log();
   }
 
   private turnOnLights(): void {
@@ -217,13 +253,14 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
       this.drawReach(viz, max, pos);
     }
     for (const al of this.reachedHouses) {
-      al.house.classList.add(this.light);
+      this.renderer.addClass(al.house, this.light); //al.house.classList.add(this.light);
     }
+    console.log();
   }
 
   private turnOffLights(): void {
     for (const al of this.reachedHouses) {
-      al.house.classList.remove(this.light);
+      this.renderer.removeClass(al.house, this.light); //al.house.classList.remove(this.light);
     }
   }
 
@@ -234,7 +271,9 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     this.reachedHouses.push(neighbor);
     const nextX = pos.x + neighbor.x;
     const nextY = pos.y + neighbor.y;
-    const newNeighbor = { house: document.getElementById(this.generateId(nextX, nextY)), x: nextX, y: nextY };
+    const newHouse = this.renderer.selectRootElement(`#${this.generateId(nextX, nextY)}`, true);
+    // const newNeighbor = { house: document.getElementById(this.generateId(nextX, nextY)), x: nextX, y: nextY };
+    const newNeighbor = { house: newHouse, x: nextX, y: nextY };
     this.drawReach(newNeighbor, max - 1, pos);
   }
 
@@ -244,6 +283,7 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     } else {
       alert("You lost!");
     }
+
     this.setupBoard();
   }
 
@@ -277,6 +317,7 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
       }
     }
     this.availableMaze = this.completeMaze;
+    console.log();
   }
 
   private isTunnelable(neighbor: any): boolean {
@@ -318,14 +359,3 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
     return neighbors.filter(Boolean);
   }
 }
-
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-fallen',
-//   templateUrl: './fallen.component.html',
-//   styleUrl: './fallen.component.css'
-// })
-// export class FallenComponent {
-
-// }
