@@ -27,15 +27,14 @@
     --green: #98FB98;
     --purple: #E6E6FA;
 
-    /* 
-    --bg-color: #f0f4f8;
-    --primary-color: #2f4f4f;
-    --apple-green: #4caf50;
-    --apple-brown: #783c00;
-    --selected-blue: #2196f3;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-dark: rgba(0, 0, 0, 0.3); 
-    */
+    /* tic-tac-toe */
+    --main-color: #0275d8;
+    --secondary-color: #6c757d;
+    --succes-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+
 }
 
 body {
