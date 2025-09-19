@@ -14,6 +14,7 @@ export class TicTacToeComponent implements AfterViewInit {
   gameIsOver = false;
   winnerMessage = '';
   moves: string[] = [];
+  isMenuOpen = false;
 
   winPatterns = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -24,11 +25,14 @@ export class TicTacToeComponent implements AfterViewInit {
   constructor(private renderer: Renderer2) { }
 
   ngAfterViewInit(): void {
-    // Configura os ouvintes de evento para as caixas após o carregamento da vista
     this.boxes.forEach((box, index) => {
       this.renderer.listen(box.nativeElement, 'click', () => this.handleMove(index));
     });
     this.resetGame();
+  }
+
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   handleMove(index: number): void {
@@ -50,9 +54,20 @@ export class TicTacToeComponent implements AfterViewInit {
     }
   }
 
+  setPlayerClass(clickedBox: HTMLElement): void{
+    if(this.currentPlayer === 'X'){
+      this.renderer.removeClass(clickedBox, 'o');
+      this.renderer.addClass(clickedBox, 'x');
+    } else {
+      this.renderer.removeClass(clickedBox, 'x');
+      this.renderer.addClass(clickedBox, 'o');
+    }
+  }
+
   makeMove(clickedBox: HTMLElement): void {
     this.renderer.setProperty(clickedBox, 'textContent', this.currentPlayer);
-    this.moves.push(clickedBox.id); // Guardar o ID em vez do elemento
+    this.setPlayerClass(clickedBox);
+    this.moves.push(clickedBox.id); 
     this.movesCount++;
     this.renderer.removeClass(clickedBox, 'selectable');
   }
@@ -119,15 +134,3 @@ export class TicTacToeComponent implements AfterViewInit {
     });
   }
 }
-
-
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-tic-tac-toe',
-//   templateUrl: './tic-tac-toe.component.html',
-//   styleUrl: './tic-tac-toe.component.css'
-// })
-// export class TicTacToeComponent {
-
-// }
