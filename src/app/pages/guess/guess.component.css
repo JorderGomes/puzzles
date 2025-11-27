@@ -7,7 +7,7 @@
 :host {
     display: block;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--background-color);
+    background-color: var(--background-card);
     color: var(--text-color);
     min-height: 100vh;
 }
@@ -36,7 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--bg-primary-button);
+    background-color: var(--primary-color);
 }
 
 .header-container {
@@ -169,7 +169,7 @@ main {
   left: -300px; /* Esconde o menu fora da tela */
   width: 250px;
   height: 100%;
-  background-color: var(--bg-primary-button);
+  background-color: var(--primary-color);
   padding: 2rem 1rem;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   transition: left 0.3s ease-in-out;
