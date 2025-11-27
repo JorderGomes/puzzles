@@ -1,0 +1,59 @@
+<div class="main-container">
+    <header>
+        <div class="container">
+            <button class="btn-hamburger" (click)="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 class="nome-site">Tic Tac Toe</h1>
+            <span></span>
+        </div>
+    </header>
+
+    <nav class="sidenav" [class.open]="isMenuOpen">
+        <div class="menu-item">
+            <button class="btn-close-menu" (click)="toggleMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="menu-item">
+            <a href="/puzzles" class="btn">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+
+        <div class="menu-item">
+            <button class="btn" (click)="resetGame(); toggleMenu()">
+                <i class="fas fa-arrow-rotate-left"></i> Reiniciar
+            </button>
+        </div>
+    </nav>
+
+    <section class="container">
+        <p id="vencedor" class="outline" [class.hidden]="!gameIsOver">
+            {{ winnerMessage }}
+        </p>
+    </section>
+
+    <section id="tic-tac">
+        <div class="row">
+            <div #box id="c1" class="box selectable" (click)="handleMove(0)"></div>
+            <div #box id="c2" class="box selectable" (click)="handleMove(1)"></div>
+            <div #box id="c3" class="box selectable" (click)="handleMove(2)"></div>
+        </div>
+        <div class="row">
+            <div #box id="c4" class="box selectable" (click)="handleMove(3)"></div>
+            <div #box id="c5" class="box selectable" (click)="handleMove(4)"></div>
+            <div #box id="c6" class="box selectable" (click)="handleMove(5)"></div>
+        </div>
+        <div class="row">
+            <div #box id="c7" class="box selectable" (click)="handleMove(6)"></div>
+            <div #box id="c8" class="box selectable" (click)="handleMove(7)"></div>
+            <div #box id="c9" class="box selectable" (click)="handleMove(8)"></div>
+        </div>
+    </section>
+<!-- 
+    <section id="reset" class="container">
+        <button id="resetar" class="btn bg-succes" (click)="resetGame()">Resetar Jogo</button>
+    </section> -->
+</div>

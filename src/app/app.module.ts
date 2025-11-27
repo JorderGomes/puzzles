@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
 import { GlutaoComponent } from './pages/glutao/glutao.component';
 import { FallenComponent } from './pages/fallen/fallen.component';
+import { GuessComponent } from './pages/guess/guess.component';
+import { TicTacToeComponent } from './pages/tic-tac-toe/tic-tac-toe.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { FallenComponent } from './pages/fallen/fallen.component';
     AppComponent,
     PuzzlesComponent,
     GlutaoComponent,
-    FallenComponent
+    FallenComponent,
+    GuessComponent,
+    TicTacToeComponent
   ],
   imports: [
     BrowserModule,

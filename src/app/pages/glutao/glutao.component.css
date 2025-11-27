@@ -39,7 +39,7 @@ h2 {
     HEADER
 */
 header {
-    background-color: #2f4f4f;
+    background-color: var(--primary-color);
     color: #fff;
     padding: 1.5rem 0;
     text-align: center;

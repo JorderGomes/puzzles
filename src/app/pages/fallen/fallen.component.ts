@@ -279,9 +279,9 @@ export class FallenComponent implements OnDestroy, AfterViewInit {
 
   private endGame(result: boolean): void {
     if (result) {
-      alert("You won!");
+      alert("Você venceu!");
     } else {
-      alert("You lost!");
+      alert("Você morreu!");
     }
 
     this.setupBoard();

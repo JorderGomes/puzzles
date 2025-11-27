@@ -12,7 +12,7 @@
 :host {
   display: block;
   min-height: 100vh;
-  background-color: var(--background-color);
+  background-color: var(--primary-color);
   font-family: Arial, sans-serif;
   color: var(--text-color);
   padding: 20px;
@@ -33,17 +33,17 @@ h1 {
 /* Container dos Cards */
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   justify-content: center;
   /* Limita a largura máxima do container */
-  max-width: 960px;
+  max-width: 650px;
   margin: 0 auto;
 }
 
 /* Estilo do Card do Jogo */
 .game-card {
-  background-color: var(--background-color-light);
+  background-color: var(--background-card);
   border-radius: 12px;
   padding: 25px;
   text-align: center;
@@ -63,12 +63,12 @@ h1 {
 .game-title {
   font-size: 1.8rem;
   font-weight: bold;
-  color: var(--bg-primary-button);
+  color: var(--text-card-color);
   margin-bottom: 10px;
 }
 
 .game-description {
-  color: #555;
+  color: var(--text-card-color);
   font-size: 1rem;
   margin-bottom: 20px;
 }
@@ -76,7 +76,7 @@ h1 {
 /* Estilo do Botão "Jogar" */
 .play-button {
   display: inline-block;
-  background-color: var(--bg-primary-button);
+  background-color: var(--button-bg-primary);
   color: var(--text-color);
   padding: 12px 24px;
   text-decoration: none;
@@ -92,56 +92,20 @@ h1 {
 }
 
 /* Responsividade */
-@media (max-width: 960px) {
+
+/* Desktop (min-width > 650px): 2 colunas */
+@media (min-width: 650px) {
   .cards-container {
-    max-width: none;
+    grid-template-columns: repeat(2, minmax(300px, 1fr)); 
+    max-width: 650px; 
   }
 }
 
-@media (min-width: 961px) {
-  .cards-container {
-    grid-template-columns: repeat(3, 300px);
-  }
-}
-
-@media (max-width: 960px) and (min-width: 840px) {
-  .cards-container {
-    grid-template-columns: repeat(3, 280px);
-  }
-}
-
-@media (max-width: 839px) and (min-width: 720px) {
-  .cards-container {
-    grid-template-columns: repeat(3, 240px);
-  }
-}
-
-@media (max-width: 719px) and (min-width: 640px) {
-  .cards-container {
-    grid-template-columns: repeat(3, 200px);
-  }
-}
-
-@media (max-width: 639px) and (min-width: 500px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 240px);
-  }
-}
-
-@media (max-width: 499px) and (min-width: 420px) {
-  .cards-container {
-    grid-template-columns: repeat(2, 200px);
-  }
-}
-
-@media (max-width: 419px) and (min-width: 320px) {
-  .cards-container {
-    grid-template-columns: 300px;
-  }
-}
-
-@media (max-width: 319px) {
+/* Mobile/Tablet (max-width <= 649px): 1 coluna */
+@media (max-width: 649px) {
   .cards-container {
     grid-template-columns: 1fr;
+    max-width: 400px; 
+    padding: 0 10px;
   }
 }

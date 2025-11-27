@@ -1,0 +1,80 @@
+<div id="wrap">
+    <header id="head">
+        <div class="header-container">
+            <button class="btn-hamburger" (click)="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>GUESS</h1>
+            <span></span>
+        </div>
+    </header>
+
+    <nav class="sidenav" [class.open]="isMenuOpen">
+        <div class="menu-item">
+            <button class="btn-close-menu" (click)="toggleMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="menu-item">
+            <a href="/puzzles" class="btn">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+        <div class="menu-item">
+            <button class="btn" (click)="onRulesClick(); toggleMenu()">
+                <i class="fas fa-gear"></i> Regras
+            </button>
+        </div>
+        <div class="menu-item">
+            <button class="btn" (click)="onResetClick(); toggleMenu()">
+                <i class="fas fa-arrow-rotate-left"></i> Reiniciar
+            </button>
+        </div>
+    </nav>
+
+    <div class="backdrop" [class.visible]="isMenuOpen" (click)="toggleMenu()"></div>
+
+    <main>
+        <div id="end-message" [class.hidden]="!endGame">
+            Parabéns você venceu em <span id="qtd-final-attempts">{{ qtdAttempts }}</span> tentativas.
+        </div>
+        <div id="info">
+            <div id="hits">
+                <span id="qtd-hits">{{ hitCount }}</span>
+                <span> acertos</span>
+            </div>
+            <span id="separator"></span>
+            <div id="attempts">
+                <span id="qtd-attempts">{{ qtdAttempts }}</span>
+                <span> tentativas</span>
+            </div>
+        </div>
+        <div id="colors" #colors (click)="onColorClick($event)">
+        </div>
+    </main>
+</div>
+
+<div id="popup-canva" [class.visible]="showRulesPopup" (click)="toggleRulesPopup()">
+    <div id="popup-rules">
+        <div class="rules-header">
+            <h3>Regras</h3>
+            <button id="btn-rules-close" class="btn btn-square pointer btn-primary" (click)="toggleRulesPopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="rule-body">
+            <p>
+                Aqui está uma lista de cores.
+            </p>
+            <p>
+                Existe uma lista de cores secreta que está em outra ordem.
+            </p>
+            <p>
+                O objetivo é trocar as cores visíveis até toda a lista ficar igual a secreta.
+            </p>
+            <p>
+                A dica são quantas cores estão certas a cada troca feita.
+            </p>
+        </div>
+    </div>
+</div>
