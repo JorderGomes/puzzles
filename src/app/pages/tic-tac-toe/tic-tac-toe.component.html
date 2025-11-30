@@ -1,11 +1,14 @@
 <div class="main-container">
     <header>
         <div class="container">
-            <button class="btn-hamburger" (click)="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <h1 class="nome-site">Tic Tac Toe</h1>
-            <span></span>
+            <div class="container-btn">
+                <button class="btn-hamburger" (click)="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="container-title">
+                <h1 class="page-title">Tic Tac Toe</h1>
+            </div>
         </div>
     </header>
 
@@ -20,6 +23,12 @@
             <a href="/puzzles" class="btn">
                 <i class="fas fa-arrow-left"></i> Voltar
             </a>
+        </div>
+
+        <div class="menu-item">
+            <button class="btn" (click)="onRulesClick(); toggleMenu()">
+                <i class="fas fa-question-circle"></i> Regras
+            </button>
         </div>
 
         <div class="menu-item">
@@ -52,8 +61,23 @@
             <div #box id="c9" class="box selectable" (click)="handleMove(8)"></div>
         </div>
     </section>
-<!-- 
-    <section id="reset" class="container">
-        <button id="resetar" class="btn bg-succes" (click)="resetGame()">Resetar Jogo</button>
-    </section> -->
+
+    <button id="reset" class="btn sucess" (click)="resetGame()">
+        Reiniciar
+    </button>
+
+    <div class="popup" [class.is-visible]="showRulesPopup">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3 class="popup-title">Regras do Tic-Tac-Toe</h3>
+                <button class="close-popup-btn" (click)="closeRulesPopup()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>Este jogo da velha tem uma reviravolta para evitar empates:</p>
+            <p>Após o quarto movimento, o jogador deve escolher qual de suas peças (X ou O) será removida do tabuleiro, permitindo que o jogo continue e que o adversário vença.</p>
+            <p>Isso garante um vencedor e impede que o jogo termine em um empate previsível.</p>
+        </div>
+    </div>
+
 </div>
