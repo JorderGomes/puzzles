@@ -11,8 +11,8 @@
 
 .main-container {
     font-family: Arial, sans-serif;
-    background-color: #f0f4f8;
-    color: #2f4f4f;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     line-height: 1.6;
     min-height: 100vh;
     display: flex;
@@ -43,7 +43,7 @@ header {
     color: #fff;
     padding: 1.5rem 0;
     text-align: center;
-    box-shadow: 0 4px 6px var(--shadow-dark);
+    /* box-shadow: 0 4px 6px var(--shadow-dark); */
     margin-bottom: 2rem;
 
     display: flex;
@@ -71,7 +71,7 @@ header .container {
     CONTEÚDO PRINCIPAL
 */
 .content {
-    background-color: #fff;
+    background-color: var(--background-card);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 15px var(--shadow-light);
@@ -213,7 +213,7 @@ header .container {
 
 #pieces i {
     cursor: pointer;
-    color: var(--apple-green);
+    color: var(--apple-red);
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
@@ -231,7 +231,7 @@ header .container {
 }
 
 #pieces .rotten {
-    color: #783c00;
+    color: var(--apple-brown);
     cursor: not-allowed;
     opacity: 0.5;
 }
