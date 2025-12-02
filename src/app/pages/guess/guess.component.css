@@ -67,22 +67,26 @@
 
 .btn {
     border: none;
-    padding: 0.75rem 2rem;
     font-size: 1.1rem;
     cursor: pointer;
-    border-radius: 50px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     text-transform: uppercase;
     font-weight: 700;
 }
 
+.btn-standard {
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+}
+
 .btn-square {
     width: 40px;
     height: 40px;
+    border-radius: 8px;
 }
 
 .btn-primary {
-    background-color: var(--bg-primary-button);
+    background-color: var(--primary-color);
     color: var(--text-color);
 }
 
@@ -297,7 +301,7 @@ main {
 #popup-rules {
     padding: 1.5rem;
     color: var(--text-color);
-    background-color: var(--color-bg-popup);
+    background-color: var(--background-card);
     width: 90vw;
     max-width: 720px;
     border-radius: 0.5rem;
