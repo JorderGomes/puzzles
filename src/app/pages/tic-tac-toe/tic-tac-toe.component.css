@@ -138,6 +138,8 @@ header .container .container-btn {
     font-size: 2rem;
     color: white; /* Cor do ícone branco, para contraste com o header primário */
     cursor: pointer;
+    position: relative;
+    z-index: 10;
 }
 
 /* Menu Lateral (Sidenav) */
