@@ -15,6 +15,7 @@ export class TicTacToeComponent implements AfterViewInit {
   winnerMessage = '';
   moves: string[] = [];
   isMenuOpen = false;
+  showRulesPopup = false;
 
   winPatterns = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -33,6 +34,14 @@ export class TicTacToeComponent implements AfterViewInit {
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  onRulesClick(): void {
+    this.showRulesPopup = true;
+  }
+
+  closeRulesPopup(): void {
+    this.showRulesPopup = false;
   }
 
   handleMove(index: number): void {
