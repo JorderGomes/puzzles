@@ -8,6 +8,8 @@
   color: var(--text-color);
   position: fixed;
   top: 0;
+  
+  overflow-y: auto;
 }
 
 /* Cabeçalho */
