@@ -11,6 +11,7 @@ import { TicTacToeComponent } from './pages/tic-tac-toe/tic-tac-toe.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { StyleguideComponent } from './pages/styleguide/styleguide.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { StyleguideComponent } from './pages/styleguide/styleguide.component';
     TicTacToeComponent,
     StyleguideComponent,
     HeaderComponent,
-    ButtonComponent
+    ButtonComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
