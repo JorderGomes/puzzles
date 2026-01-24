@@ -8,6 +8,9 @@ import { GlutaoComponent } from './pages/glutao/glutao.component';
 import { FallenComponent } from './pages/fallen/fallen.component';
 import { GuessComponent } from './pages/guess/guess.component';
 import { TicTacToeComponent } from './pages/tic-tac-toe/tic-tac-toe.component';
+import { HeaderComponent } from './components/header/header.component';
+import { ButtonComponent } from './components/button/button.component';
+import { StyleguideComponent } from './pages/styleguide/styleguide.component';
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import { TicTacToeComponent } from './pages/tic-tac-toe/tic-tac-toe.component';
     GlutaoComponent,
     FallenComponent,
     GuessComponent,
-    TicTacToeComponent
+    TicTacToeComponent,
+    StyleguideComponent,
+    HeaderComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

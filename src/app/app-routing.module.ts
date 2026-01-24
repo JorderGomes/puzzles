@@ -5,6 +5,7 @@ import { GlutaoComponent } from './pages/glutao/glutao.component';
 import { FallenComponent } from './pages/fallen/fallen.component';
 import { GuessComponent } from './pages/guess/guess.component';
 import { TicTacToeComponent } from './pages/tic-tac-toe/tic-tac-toe.component';
+import { StyleguideComponent } from './pages/styleguide/styleguide.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/puzzles', pathMatch: 'full' },
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'glutao', component: GlutaoComponent }, 
   { path: 'fallen', component: FallenComponent},
   { path: 'guess', component: GuessComponent},
-  { path: 'tic-tac-toe', component: TicTacToeComponent}
+  { path: 'tic-tac-toe', component: TicTacToeComponent},
+  { path: 'styleguide', component: StyleguideComponent }
 ];
 
 @NgModule({
