@@ -12,6 +12,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { ButtonComponent } from './components/button/button.component';
 import { StyleguideComponent } from './pages/styleguide/styleguide.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { ItemNavComponent } from './components/item-nav/item-nav.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { MenuComponent } from './components/menu/menu.component';
     StyleguideComponent,
     HeaderComponent,
     ButtonComponent,
-    MenuComponent
+    MenuComponent,
+    SidenavComponent,
+    ItemNavComponent
   ],
   imports: [
     BrowserModule,
