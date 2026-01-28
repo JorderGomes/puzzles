@@ -1,4 +1,6 @@
 <header>
-    <app-menu></app-menu>
-    <h1>{{title}}</h1>
+    <div class="header-side-content">
+        <ng-content select="app-menu"></ng-content>
+    </div>
+    <h1>{{ title }}</h1>
 </header>
