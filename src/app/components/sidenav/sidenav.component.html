@@ -1,0 +1,9 @@
+<div class="sidenav" [class.open]="isOpen">
+  <button id="close-menu" (click)="close()">
+    <i class="fas fa-times"></i>
+  </button>
+  <nav>
+    <ng-content></ng-content>
+  </nav>
+</div>
+<div class="backdrop" [class.visible]="isOpen" (click)="close()"></div>

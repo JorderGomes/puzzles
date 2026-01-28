@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    /* Esconde o menu fora da tela */
+    background-color: var(--primary-color);
+    padding-top: 60px;
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    /* padding: 2rem 1rem; */
+}
+
+.sidenav.open {
+    left: 0;
+    /* Move o menu para dentro da tela quando a classe .open é adicionada */
+}
+
+/* .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+} */
+
+
+#close-menu {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0.75rem 0;
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+    background: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#close-menu:hover {
+  color: var(--primary-color);
+  background-color: white;
+}
+
+nav {
+    width: 100%;
+}
