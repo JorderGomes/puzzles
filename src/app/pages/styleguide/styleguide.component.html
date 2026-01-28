@@ -1,3 +1,18 @@
 <div class="main-container">
-    <app-header title="Example header"></app-header>
+    <app-header title="Example header">
+        <app-menu></app-menu>
+    </app-header>
+    <app-sidenav>
+        <app-item-nav 
+            [type]="NavItemType.LINK" 
+            name="Voltar" 
+            link="/puzzles" 
+            icon="fa-arrow-left">
+        </app-item-nav>
+        <app-item-nav 
+            [type]="NavItemType.BUTTON" 
+            name="Regras" 
+            icon="fa-gear">
+        </app-item-nav>
+    </app-sidenav>
 </div>
