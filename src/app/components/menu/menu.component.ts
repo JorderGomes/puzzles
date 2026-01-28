@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuService } from '../../services/menu.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,11 +8,10 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
 
-  isMenuOpen = false;
+  constructor(private menuService: MenuService) { }
 
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
-    alert(`Menu is now ${this.isMenuOpen ? 'open' : 'closed'}`);
+  toggleMenu() {
+    this.menuService.toggle();
   }
 
 }
