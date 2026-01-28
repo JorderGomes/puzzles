@@ -1,0 +1,9 @@
+<div class="menu-item-wrapper">
+    <a *ngIf="type === NavType.LINK" [routerLink]="link" class="menu-item">
+        <i class="fas" [ngClass]="icon"></i> {{ name }}
+    </a>
+
+    <button *ngIf="type === NavType.BUTTON" class="menu-item">
+        <i class="fas" [ngClass]="icon"></i> {{ name }}
+    </button>
+</div>
