@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex: 1; /* Faz o componente ocupar todo o espaço restante no container flex pai */
+    flex-direction: column;
+    overflow: hidden; /* Evita scroll duplo com o body */
+}
+
+.content-wrapper {
+    flex: 1;
+    overflow-y: auto; /* Habilita o scroll apenas nesta área se o conteúdo exceder a tela */
+    background-color: var(--primary-color); /* Cor padrão do projeto  */
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
