@@ -14,6 +14,8 @@ import { StyleguideComponent } from './pages/styleguide/styleguide.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ItemNavComponent } from './components/item-nav/item-nav.component';
+import { PageContentComponent } from './components/page-content/page-content.component';
+import { CardComponent } from './components/card/card.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { ItemNavComponent } from './components/item-nav/item-nav.component';
     ButtonComponent,
     MenuComponent,
     SidenavComponent,
-    ItemNavComponent
+    ItemNavComponent,
+    PageContentComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
