@@ -2,6 +2,43 @@
     <app-header title="Example header">
         <app-menu></app-menu>
     </app-header>
+
+    <app-page-content>
+        <section class="article-style card-grid">
+            <app-card>
+                <h3 class="card-title">Card title</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium perspiciatis delectus, minus tempore a obcaecati sed animi, labore modi odit assumenda nam? Eum quae harum dignissimos expedita repellat a ut?
+                </p>
+                <app-button text="Detalhes" (click)="onPlayClick()"></app-button>
+            </app-card>
+            <app-card>
+                <h3 class="card-title">Card title</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium perspiciatis delectus, minus tempore a obcaecati sed animi, labore modi odit assumenda nam? Eum quae harum dignissimos expedita repellat a ut?
+                </p>
+            </app-card>
+            <app-card>
+                <h3 class="card-title">Card title</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium perspiciatis delectus, minus tempore a obcaecati sed animi, labore modi odit assumenda nam? Eum quae harum dignissimos expedita repellat a ut?
+                </p>
+            </app-card>
+            <app-card>
+                <h3 class="card-title">Card title</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium perspiciatis delectus, minus tempore a obcaecati sed animi, labore modi odit assumenda nam? Eum quae harum dignissimos expedita repellat a ut?
+                </p>
+            </app-card>
+            <app-card>
+                <h3 class="card-title">Card title</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium perspiciatis delectus, minus tempore a obcaecati sed animi, labore modi odit assumenda nam? Eum quae harum dignissimos expedita repellat a ut?
+                </p>
+            </app-card>
+        </section>
+    </app-page-content>
+
     <app-sidenav>
         <app-item-nav 
             [type]="NavItemType.LINK" 
@@ -12,7 +49,14 @@
         <app-item-nav 
             [type]="NavItemType.BUTTON" 
             name="Regras" 
+            (click)="onRulesClick()"
             icon="fa-gear">
+        </app-item-nav>
+        <app-item-nav 
+            [type]="NavItemType.BUTTON" 
+            name="Descrição" 
+            (click)="onDescriptionClick()"
+            icon="fa-file">
         </app-item-nav>
     </app-sidenav>
 </div>

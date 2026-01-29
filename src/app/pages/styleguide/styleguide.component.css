@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+app-header {
+    flex-shrink: 0;
+}
+
+.article-style {
+    width: 60%;
+    margin: auto;
+}
+
+.article-style h2 {
+    text-align: center;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+
+
+@media (max-width: 560px) {
+    .article-style {
+        width: 90%;
+    }
+}
