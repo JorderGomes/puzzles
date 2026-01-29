@@ -42,6 +42,7 @@
     --info-color: #17a2b8;
 
     font-family: Arial, sans-serif;
+    color: var(--text-color);
 
 }
 
