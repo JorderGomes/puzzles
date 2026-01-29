@@ -1,40 +1,40 @@
 <div class="main-container">
-  <header>
-    <h1>Puzzles</h1>
-  </header>
+  <app-header title="Puzzles"></app-header>
 
-  <div class="cards-container">
-    <div class="game-card">
-      <h2 class="game-title">Glutão</h2>
-      <p class="game-description">
-        O jogo das maçãs. Evite pegar a última maça (podre) para vencer o jogo.
-      </p>
-      <a href="/glutao" class="play-button">Jogar</a>
-    </div>
+  <app-page-content>
+    <section class="article-style card-grid">
+      <app-card class="card">
+        <h3 class="card-title">Glutão</h3>
+        <p class="game-description">
+          O jogo das maçãs. Evite pegar a última maça (podre) para vencer o jogo.
+        </p>
+        <app-button text="Jogar"></app-button>
+      </app-card>
+      
+      <app-card class="card">
+        <h3 class="card-title">Tic-Tac-Toe</h3>
+        <p class="game-description">
+          Um jogo da velha clássico, mas com uma reviravolta para evitar empates.
+        </p>
+        <app-button text="Jogar"></app-button>
+      </app-card>
 
-    <div class="game-card">
-      <h2 class="game-title">Tic-Tac-Toe</h2>
-      <p class="game-description">
-        Um jogo da velha clássico, mas com uma reviravolta para evitar empates.
-      </p>
-      <a href="/tic-tac-toe" class="play-button">Jogar</a>
-    </div>
+      <app-card class="card">
+        <h3 class="card-title">Fallen</h3>
+        <p class="game-description">
+          Explore um labirinto escuro para encontrar a saída antes que seja tarde.
+        </p>
+        <app-button text="Jogar"></app-button>
+      </app-card>
 
-    <div class="game-card">
-      <h2 class="game-title">Fallen</h2>
-      <p class="game-description">
-        Explore um labirinto escuro para encontrar a saída antes que seja tarde.
-      </p>
-      <a href="/fallen" class="play-button">Jogar</a>
-    </div>
+      <app-card class="card">
+        <h3 class="card-title">Guess</h3>
+        <p class="game-description">
+          Adivinhe a sequência de cores correta em um número limitado de tentativas.
+        </p>
+        <app-button text="Jogar"></app-button>
+      </app-card>
+    </section>
+  </app-page-content>
 
-    <div class="game-card">
-      <h2 class="game-title">Guess</h2>
-      <p class="game-description">
-        Adivinhe a sequência de cores correta em um número limitado de tentativas.
-      </p>
-      <a href="/guess" class="play-button">Jogar</a>
-    </div>
-
-  </div>
 </div>
