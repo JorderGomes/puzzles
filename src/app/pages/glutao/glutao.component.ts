@@ -101,10 +101,6 @@ export class GlutaoComponent implements AfterViewInit {
   }
 
   removePieces(): void {
-    if (this.selectedPieces.length === 0) {
-      console.log("Por favor escolha algumas maçãs");
-      return;
-    }
     this.selectedPieces.forEach(piece => piece.remove());
     this.QtyExistingPieces -= this.selectedPieces.length;
     this.selectedPieces = [];
@@ -202,6 +198,10 @@ export class GlutaoComponent implements AfterViewInit {
 
   // Métodos de eventos do HTML
   onEatClick(): void {
+    if (this.selectedPieces.length === 0) {
+      console.log("Por favor escolha algumas maçãs");
+      return;
+    }
     this.removePieces();
     setTimeout(() => {
       this.play();
