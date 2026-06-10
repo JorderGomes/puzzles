@@ -1,83 +1,50 @@
 <div class="main-container">
-  <header>
+  <app-header title="Glutão">
+    <app-menu></app-menu>
+  </app-header>
+
+  <app-page-content>
+    <div class="backdrop" [class.visible]="isMenuOpen" (click)="toggleMenu()"></div>
+
     <div class="container">
-      <button class="btn-hamburger" (click)="toggleMenu()">
-        <i class="fas fa-bars"></i>
-      </button>
-      <h1 class="page-title thin">Glutão</h1>
-    </div>
-  </header>
-
-  <nav class="sidenav" [class.open]="isMenuOpen">
-    <div class="menu-item">
-      <button class="btn-close-menu" (click)="toggleMenu()">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-
-    <div class="menu-item">
-      <a href="/puzzles" class="btn">
-        <i class="fas fa-arrow-left"></i> Voltar
-      </a>
-    </div>
-
-    <div class="menu-item">
-      <button class="btn" (click)="onRulesClick(); toggleMenu()">
-        <i class="fas fa-gear"></i> Regras
-      </button>
-    </div>
-
-    <div class="menu-item">
-      <select class="form-select" (change)="onGameModeChange($event); toggleMenu()">
-        <option value="easy" [selected]="gameMode === 'easy'">Easy</option>
-        <option value="medium" [selected]="gameMode === 'medium'">Medium</option>
-        <option value="hard" [selected]="gameMode === 'hard'">Hard</option>
-      </select>
-    </div>
-
-    <div class="menu-item">
-      <button class="btn" (click)="onReplayClick(); toggleMenu()">
-        <i class="fas fa-arrow-rotate-left"></i> Reiniciar
-      </button>
-    </div>
-  </nav>
-
-  <div class="popup" [class.is-visible]="showRulesPopup">
-    <div class="popup-content">
-      <div class="popup-header">
-        <h3 class="popup-title">Regras</h3>
-        <button class="close-popup-btn" (click)="closeRulesPopup()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <p>Aqui há {{ QtyExistingPieces }} maçãs.</p>
-      <p>Durante o jogo cada jogador alternativamente pode retirar desde 1 até {{ QtyRemoval }} delas.</p>
-      <p>Aquele que ficar com a última, perderá.</p>
-    </div>
-  </div>
-
-  <div class="backdrop" [class.visible]="isMenuOpen" (click)="toggleMenu()"></div>
-
-  <div class="container">
-    <section class="content">
-      <div class="row">
-        <div id="player-click" class="center col-3">
-          <h2 id="player" class="thin" #playerText>Sua vez!</h2>
+      <section class="content">
+        <div class="row">
+          <div id="player-click" class="center col-3">
+            <h2 id="player" class="thin" #playerText>Sua vez!</h2>
+          </div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="center">
-          <div id="pieces" #piecesContainer></div>
+        <div class="row">
+          <div class="center">
+            <div id="pieces" #piecesContainer></div>
+          </div>
         </div>
-      </div>
 
-      <div class="row action-buttons-row">
-        <div class="action-buttons-group">
-          <button id="eat" class="btn sucess" (click)="onEatClick()">Comer</button>
+        <div class="row action-buttons-row">
+          <div class="action-buttons-group">
+            <button id="eat" class="btn sucess" (click)="onEatClick()">Comer</button>
+          </div>
         </div>
-      </div>
+      </section>
+      <section class="content">
+        <div class="row">
+          <h2 class="thin center">Regras</h2>
+        </div>
+        <div class="">
+          <p>Aqui há {{ QtyExistingPieces }} maçãs.</p>
+          <p>Durante o jogo cada jogador alternativamente pode retirar desde 1 até {{ QtyRemoval }} delas.</p>
+          <p>Aquele que ficar com a última, perderá.</p>
+        </div>
+      </section>
+    </div>
+  </app-page-content>
 
-    </section>
-  </div>
+  <app-sidenav>
+    <app-item-nav 
+      [type]="NavItemType.LINK" 
+      name="Voltar" 
+      link="/puzzles" 
+      icon="fa-arrow-left">
+    </app-item-nav>
+  </app-sidenav>
 </div>

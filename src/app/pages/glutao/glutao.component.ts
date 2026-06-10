@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild, Renderer2 } from '@angular/core';
+import { NavItemType } from '../../components/item-nav/item-nav.component';
 
 @Component({
   selector: 'app-glutao',
@@ -12,6 +13,8 @@ export class GlutaoComponent implements AfterViewInit {
 
   isMenuOpen = false;
   showRulesPopup = false;
+
+  public NavItemType = NavItemType;
 
   constructor(private renderer: Renderer2) { }
 
