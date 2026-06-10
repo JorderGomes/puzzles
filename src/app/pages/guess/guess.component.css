@@ -171,7 +171,7 @@ main {
     background-color: var(--purple);
 }
 
-.line{
+.line {
     width: 100%;
     padding: 30px 0;
     text-align: center;
@@ -243,7 +243,8 @@ main {
     align-items: center;
 }
 
-.menu-item a, .menu-item button {
+.menu-item a,
+.menu-item button {
     /* width: 100%;
     text-align: left;
     background: none;
@@ -329,4 +330,39 @@ main {
 
 #btn-rules-close {
     display: block;
+}
+
+/* Responsive */
+
+@media (max-width: 720px) {
+    main {
+        width: 70%;
+    }
+
+    #colors {
+        padding: 4px;
+    }
+
+    .circle {
+        width: 40px;
+        height: 40px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    main {
+        width: 90%;
+    }
+}
+
+@media (max-width: 320px) {
+    /* main {
+        width: 90%;
+    } */
+
+    .circle {
+        width: 20px;
+        height: 20px;
+    }
 }
