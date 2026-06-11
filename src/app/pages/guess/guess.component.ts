@@ -38,19 +38,19 @@ export class GuessComponent implements AfterViewInit {
   onRulesClick(): void {
     this.showRulesPopup = true;
   }
-  
+
   onResetClick(): void {
     console.log('Reiniciando o jogo...');
     this.qtdAttempts = 0;
     this.endGame = false;
     this.colorsToSwap = [];
     this.hitCount = 0;
-    
+
     // Limpa o conteúdo atual para criar novas "casas"
     if (this.colorsContainer && this.colorsContainer.nativeElement) {
       this.renderer.setProperty(this.colorsContainer.nativeElement, 'innerHTML', '');
     }
-    
+
     this.initGame();
   }
 
@@ -69,11 +69,28 @@ export class GuessComponent implements AfterViewInit {
     }
   }
 
+  // shuffleArray(array: any[]): any[] {
+  //   for (let i = array.length - 1; i > 0; i--) {
+  //     const j = Math.floor(Math.random() * (i + 1));
+  //     [array[i], array[j]] = [array[j], array[i]];
+  //   }
+  //   return array;
+  // }
+
   shuffleArray(array: any[]): any[] {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+
+    for (let i = 0; i < array.length; i++) {
+      if (array[i] === this.allColors[i]) {
+        const swapIndex = (i === array.length - 1) ? i - 1 : i + 1;
+        [array[i], array[swapIndex]] = [array[swapIndex], array[i]];
+      }
+    }
+    
+    // console.log(array);
     return array;
   }
 
@@ -88,6 +105,8 @@ export class GuessComponent implements AfterViewInit {
   initGame(): void {
     this.shuffleArray(this.secretColors);
     this.allColors.map(color => this.createHouse(color));
+    // console.log(this.allColors);
+    
     this.testWin();
   }
 
@@ -145,13 +164,4 @@ export class GuessComponent implements AfterViewInit {
   }
 }
 
-// import { Component } from '@angular/core';
 
-// @Component({
-//   selector: 'app-guess',
-//   templateUrl: './guess.component.html',
-//   styleUrl: './guess.component.css'
-// })
-// export class GuessComponent {
-
-// }
